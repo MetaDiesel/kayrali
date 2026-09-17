@@ -149,6 +149,14 @@ img, svg { display: block; }
 }
 .nav-toggle span { width: 24px; height: 1.5px; background: var(--cream); transition: transform 0.4s var(--ease), opacity 0.3s; }
 
+/* ---------- Icons ---------- */
+
+.ico { width: 1.1em; height: 1.1em; flex: none; }
+.btn .ico { width: 1.15em; height: 1.15em; margin-right: 0.55em; }
+.nav-icon { display: inline-flex; align-items: center; color: var(--cream-60); }
+.nav-icon:hover { color: var(--gold-2); }
+.nav-icon .ico { width: 1.25em; height: 1.25em; }
+
 /* ---------- Buttons ---------- */
 
 .btn {
@@ -190,13 +198,21 @@ img, svg { display: block; }
 .js .hero-title .line-inner { transform: translateY(110%); }
 .hero-title .line-inner { display: block; }
 .hero-title em { font-style: italic; color: var(--gold-2); }
-.hero-side { grid-column: 2; }
-.hero-lead { color: var(--cream); font-size: 1.02rem; max-width: 34ch; margin-bottom: 26px; }
+.hero-side {
+  grid-column: 2;
+  padding: 26px 28px;
+  border-radius: 6px 6px 6px 48px;
+  background: rgba(18, 7, 4, 0.62);
+  border: 1px solid rgba(254, 249, 240, 0.1);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.hero-lead { color: var(--cream); font-size: 1.05rem; line-height: 1.65; max-width: 34ch; margin-bottom: 24px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-meta {
   grid-column: 1; grid-row: 2;
   display: flex; flex-wrap: wrap; gap: 8px 28px; align-self: end;
-  font-size: 0.82rem; color: var(--cream-30);
+  font-size: 0.85rem; color: var(--cream);
+  text-shadow: 0 1px 12px rgba(18, 7, 4, 0.9);
 }
 .js .hero-side, .js .hero-meta, .js .scroll-cue { opacity: 0; }
 
@@ -322,6 +338,15 @@ main > section:not(.hero) { background: var(--ink); }
 .swatch-organza .zari { background-color: #8c5a48; }
 .swatch-party .zari { background-color: #101016; }
 
+.figure {
+  position: absolute; z-index: 4; left: 50%; bottom: 0;
+  height: 96%; width: auto; transform: translateX(-50%);
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.55));
+  transition: transform 0.6s var(--ease-out);
+}
+.piece:hover .figure { transform: translateX(-50%) translateY(-6px); }
+.swatch-organza { --skin: #b97f57; }
+
 .piece-info h3 { font-family: var(--display); font-size: 1.5rem; line-height: 1.1; margin-bottom: 6px; }
 .piece-info p { color: var(--cream-60); font-size: 0.92rem; }
 
@@ -369,13 +394,18 @@ main > section:not(.hero) { background: var(--ink); }
 
 .steps-list { list-style: none; margin: 0; padding: 0; display: grid; }
 .step {
-  min-height: 70vh; display: grid; align-content: center; gap: 14px;
+  min-height: 56vh; display: grid; grid-template-columns: clamp(96px, 12vw, 150px) minmax(0, 1fr);
+  align-items: center; gap: clamp(20px, 3vw, 40px);
   padding: 40px 0; border-top: 1px solid var(--cream-12);
-  opacity: 0.25; transition: opacity 0.5s;
+  opacity: 0.3; transition: opacity 0.5s;
 }
 .step.is-active { opacity: 1; }
+.step-copy { display: grid; gap: 14px; }
 .step h3 { font-family: var(--display); font-size: clamp(2.4rem, 5vw, 4.5rem); line-height: 1; }
-.step p { color: var(--cream-60); max-width: 36ch; font-size: 1.05rem; }
+.step p { color: var(--cream); max-width: 36ch; font-size: 1.05rem; }
+.step-art { width: 100%; height: auto; color: var(--gold-2); }
+.step-art path, .step-art circle { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease) 0.1s; }
+.step.is-active .step-art path, .step.is-active .step-art circle { stroke-dashoffset: 0; }
 
 /* ---------- Why ---------- */
 
@@ -428,8 +458,12 @@ main > section:not(.hero) { background: var(--ink); }
 .visit-hours dt { color: var(--cream-60); }
 .visit-hours dd { margin: 0; }
 .visit-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.visit-phone { color: var(--cream-60); }
-.visit-phone a { color: var(--cream); border-bottom: 1px solid var(--gold); }
+.visit-address { display: flex; gap: 12px; align-items: flex-start; }
+.visit-address .ico { color: var(--gold-2); margin-top: 0.35em; }
+.visit-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.visit-links a { display: inline-flex; align-items: center; gap: 12px; color: var(--cream); transition: color 0.3s; }
+.visit-links a:hover { color: var(--gold-2); }
+.visit-links .ico { color: var(--gold-2); width: 1.3em; height: 1.3em; }
 .visit-map { min-height: 380px; border-radius: 200px 6px 6px 6px; overflow: hidden; }
 .visit-map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; filter: invert(0.92) hue-rotate(180deg) saturate(0.4) brightness(0.9); }
 
@@ -446,7 +480,8 @@ main > section:not(.hero) { background: var(--ink); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .footer-word { font-family: var(--display); font-size: clamp(3rem, 10vw, 8rem); line-height: 1; color: var(--cream); letter-spacing: 0.02em; }
 .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
-.footer-links a { border-bottom: 1px solid var(--cream-30); padding-bottom: 2px; transition: border-color 0.3s; }
+.footer-links a { display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--cream-30); padding-bottom: 4px; transition: border-color 0.3s; }
+.footer-links .ico { color: var(--gold-2); }
 .footer-links a:hover { border-color: var(--gold-2); }
 .footer-fine { color: var(--cream-60); font-size: 0.85rem; }
 
@@ -478,7 +513,9 @@ main > section:not(.hero) { background: var(--ink); }
   .steps, .faq, .visit { grid-template-columns: 1fr; }
   .steps-sticky { position: static; }
   .steps-kolam { width: 180px; }
-  .step { min-height: 0; }
+  .step { min-height: 0; grid-template-columns: 80px minmax(0, 1fr); align-items: start; }
+  .hero-side { padding: 20px; }
+  .nav-icon { margin-top: 12px; }
   .visit-map { border-radius: 6px; min-height: 300px; }
 }
 
@@ -498,6 +535,7 @@ main > section:not(.hero) { background: var(--ink); }
   .hero-side, .hero-meta, .scroll-cue { opacity: 1; }
   .intro-text .w { opacity: 1; }
   .step { opacity: 1; }
+  .step-art path, .step-art circle { stroke-dashoffset: 0; }
   .silk { display: none; }
   .cursor { display: none; }
   * { transition-duration: 0.01ms !important; }

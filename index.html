@@ -121,7 +121,85 @@
     <circle cx="42" cy="100" r="3.5"/>
     <circle cx="100" cy="100" r="4"/>
   </g>
-</symbol></svg>
+</symbol>
+
+<!-- Fashion croquis: a figure in a saree. Colours come from CSS vars on the parent. -->
+<symbol id="fig-saree" viewBox="0 0 240 480">
+  <g fill="var(--skin, #c98b60)">
+    <path d="M118 24c-10 0-16 9-16 22 0 10 6 22 16 22s16-12 16-22c0-13-6-22-16-22z"/>
+    <path d="M110 64h16v18h-16z"/>
+    <path d="M78 96c-6 40-8 80-4 128l12-2c2-44 2-84 8-120z"/>
+    <path d="M160 96c6 40 8 80 4 128l-12-2c-2-44-2-84-8-120z"/>
+    <path d="M104 438h12v22h-12zM122 438h12v22h-12z"/>
+  </g>
+  <path fill="var(--hair, #2a1208)" d="M100 40c0-18 8-28 20-28s20 10 20 28c0 4-1 8-2 10-4-10-10-14-18-14s-14 4-18 14c-1-2-2-6-2-10zM134 46a8 8 0 1 1 8 8 8 8 0 0 1-8-8z"/>
+  <!-- blouse -->
+  <path fill="var(--f2, #b8863a)" d="M84 90c10-8 20-10 36-10s26 2 36 10l4 34-14 6 2 36H96l2-36-14-6z"/>
+  <!-- pleated skirt of the saree -->
+  <path fill="var(--f1, #8e1b1b)" d="M96 166h48l30 272H66z"/>
+  <g stroke="var(--f1d, rgba(0,0,0,.35))" stroke-width="1.5" fill="none">
+    <path d="M110 166l-14 272M120 166l0 272M130 166l14 272"/>
+  </g>
+  <!-- hem border -->
+  <path fill="var(--f2, #b8863a)" d="M68 420l104 0 2 18H66z"/>
+  <path stroke="var(--f3, #fff3d6)" stroke-width="1.2" fill="none" d="M69 426h102M70 432h100"/>
+  <!-- pallu across the chest and over the left shoulder -->
+  <path fill="var(--f1, #8e1b1b)" d="M150 180c-24-6-44-28-52-56l-12-30 12-6 8 24c8 24 24 40 48 46l6 18z"/>
+  <path fill="var(--f1, #8e1b1b)" d="M86 88l12-6c-8 40-18 84-24 130-6 40-6 80-2 118l-16 2c-4-42-4-84 4-126 6-40 16-84 26-118z" opacity=".92"/>
+  <path stroke="var(--f2, #b8863a)" stroke-width="4" fill="none" d="M98 82c-8 40-18 84-24 130-6 40-6 80-2 118"/>
+  <path stroke="var(--f2, #b8863a)" stroke-width="3" fill="none" d="M150 180c-24-6-44-28-52-56"/>
+  <!-- waist tuck -->
+  <path fill="var(--f2, #b8863a)" d="M96 164h48v6H96z" opacity=".9"/>
+  <!-- jewellery -->
+  <circle cx="118" cy="96" r="2.5" fill="var(--f3, #fff3d6)"/>
+  <path stroke="var(--f3, #fff3d6)" stroke-width="1.5" fill="none" d="M108 84c4 8 16 8 20 0"/>
+</symbol>
+
+<!-- Fashion croquis: a figure in a lehenga with a dupatta. -->
+<symbol id="fig-lehenga" viewBox="0 0 240 480">
+  <g fill="var(--skin, #c98b60)">
+    <path d="M118 24c-10 0-16 9-16 22 0 10 6 22 16 22s16-12 16-22c0-13-6-22-16-22z"/>
+    <path d="M110 64h16v18h-16z"/>
+    <path d="M78 96c-6 40-8 80-4 128l12-2c2-44 2-84 8-120z"/>
+    <path d="M160 96c6 40 8 80 4 128l-12-2c-2-44-2-84-8-120z"/>
+    <path d="M98 140h44v30H98z"/>
+    <path d="M104 438h12v22h-12zM122 438h12v22h-12z"/>
+  </g>
+  <path fill="var(--hair, #2a1208)" d="M100 40c0-18 8-28 20-28s20 10 20 28c0 4-1 8-2 10-4-10-10-14-18-14s-14 4-18 14c-1-2-2-6-2-10zM94 46a8 8 0 1 1 8 8 8 8 0 0 1-8-8z"/>
+  <!-- choli -->
+  <path fill="var(--f2, #b8863a)" d="M84 90c10-8 20-10 36-10s26 2 36 10l4 34-14 6v12H96v-12l-14-6z"/>
+  <path stroke="var(--f3, #fff3d6)" stroke-width="1.2" fill="none" d="M100 136h40"/>
+  <!-- skirt -->
+  <path fill="var(--f1, #b22a45)" d="M94 168h52c6 40 30 130 60 250-30 16-66 22-86 22s-56-6-86-22c30-120 54-210 60-250z"/>
+  <g stroke="var(--f1d, rgba(0,0,0,.3))" stroke-width="1.5" fill="none">
+    <path d="M108 168l-30 262M120 170v266M132 168l30 262M100 168l-52 250M140 168l52 250"/>
+  </g>
+  <!-- hem borders -->
+  <path fill="none" stroke="var(--f2, #b8863a)" stroke-width="9" d="M36 416c30 16 64 22 84 22s54-6 84-22"/>
+  <path fill="none" stroke="var(--f3, #fff3d6)" stroke-width="1.5" d="M40 404c30 14 62 20 80 20s50-6 80-20"/>
+  <path fill="none" stroke="var(--f2, #b8863a)" stroke-width="3" d="M52 372c26 12 50 16 68 16s42-4 68-16"/>
+  <!-- waistband -->
+  <path fill="var(--f2, #b8863a)" d="M94 166h52v8H94z"/>
+  <!-- dupatta from the right shoulder across to the left hip and down the side -->
+  <path fill="var(--f2, #b8863a)" opacity=".55" d="M154 84c-10 40-40 70-70 90-10 6-18 14-22 24l-6 70c-6 60-4 110 6 150l-16 4c-12-44-14-98-8-156l6-72c4-14 14-26 28-34 26-16 50-44 60-84z"/>
+  <path fill="none" stroke="var(--f3, #fff3d6)" stroke-width="1.5" opacity=".8" d="M154 84c-10 40-40 70-70 90-10 6-18 14-22 24l-6 70c-6 60-4 110 6 150"/>
+  <circle cx="118" cy="96" r="2.5" fill="var(--f3, #fff3d6)"/>
+  <path stroke="var(--f3, #fff3d6)" stroke-width="1.5" fill="none" d="M108 84c4 8 16 8 20 0"/>
+</symbol>
+
+<!-- Icons -->
+<symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/></symbol>
+<symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.2 15.3l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zm-3 4.4c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.6 0 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4l-.5-.3-1.9-.9c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.8-1.4-1.7-1.6-2-.1-.3 0-.4.1-.6l.5-.6.3-.5c.1-.2 0-.4 0-.5l-.9-2c-.2-.5-.4-.5-.6-.5z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 21s-6-5.4-6-11a6 6 0 0 1 12 0c0 5.6-6 11-6 11z"/><circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M5 4h3.5l1.6 4-2 1.3a11 11 0 0 0 6.6 6.6l1.3-2 4 1.6V19a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 7.5V12l3 2"/></symbol>
+
+<!-- Step illustrations, drawn in when the step activates -->
+<symbol id="s-pick" viewBox="0 0 160 160"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M80 28c-8 0-12 6-12 12 0 5 4 8 12 12v10"/><path pathLength="1" d="M80 62L22 96c-4 3-2 8 3 8h110c5 0 7-5 3-8z"/><path pathLength="1" d="M56 104c4 16 10 26 24 26s20-10 24-26"/><path pathLength="1" d="M42 104h76"/><path pathLength="1" d="M64 116h32"/></g></symbol>
+<symbol id="s-fit" viewBox="0 0 160 160"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M20 60c20-24 50-30 80-16 20 10 34 30 40 56"/><path pathLength="1" d="M34 50l4 8M50 40l3 8M68 34l2 9M86 34l1 9M104 40l-1 9M120 54l-4 8M132 74l-6 6"/><path pathLength="1" d="M52 118c0-8 8-14 18-14h28c8 0 12 4 12 10s-4 10-12 10H74"/><path pathLength="1" d="M60 128l-10 8"/></g></symbol>
+<symbol id="s-wear" viewBox="0 0 160 160"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M80 26v16M80 118v16M26 80h16M118 80h16M42 42l11 11M107 107l11 11M42 118l11-11M107 53l11-11"/><circle pathLength="1" cx="80" cy="80" r="22"/><path pathLength="1" d="M68 84c4 8 20 8 24 0"/><path pathLength="1" d="M136 30l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM26 124l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></g></symbol>
+<symbol id="s-return" viewBox="0 0 160 160"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path pathLength="1" d="M124 68A46 46 0 0 0 40 60"/><path pathLength="1" d="M36 92a46 46 0 0 0 84 8"/><path pathLength="1" d="M40 44v18h18M120 116V98h-18"/><path pathLength="1" d="M66 64c8 0 12-6 14-12 2 6 6 12 14 12l-6 30H72z"/></g></symbol>
+</svg>
 
 <div class="loader" id="loader" aria-hidden="true">
   <svg class="loader-kolam" viewBox="0 0 200 200" width="140" height="140"><use href="#k"/></svg>
@@ -142,8 +220,9 @@
     <a href="#how-it-works">How it works</a>
     <a href="#faq">Questions</a>
     <a href="#visit">Visit</a>
+    <a href="https://www.instagram.com/kayrali.my" class="nav-icon" target="_blank" rel="noopener" aria-label="Kayrali on Instagram"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg></a>
   </nav>
-  <a href="https://wa.me/60123555341?text=Hi%20Kayrali%2C%20I%27d%20like%20to%20rent%20a%20saree%20or%20lehenga." class="btn btn-solid nav-cta" data-magnetic target="_blank" rel="noopener">Book on WhatsApp</a>
+  <a href="https://wa.me/60123555341?text=Hi%20Kayrali%2C%20I%27d%20like%20to%20rent%20a%20saree%20or%20lehenga." class="btn btn-solid nav-cta" data-magnetic target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"/></svg>Book on WhatsApp</a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
 </header>
 
@@ -157,7 +236,7 @@
     <div class="hero-side">
       <p class="hero-lead">Designer sarees and lehengas to rent in Petaling Jaya. Pick a piece, wear it to the wedding, the Deepavali open house or the shoot, and bring it back. We handle the cleaning.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/60123555341?text=Hi%20Kayrali%2C%20I%27d%20like%20to%20rent%20a%20saree%20or%20lehenga." class="btn btn-solid" data-magnetic target="_blank" rel="noopener">Book on WhatsApp</a>
+        <a href="https://wa.me/60123555341?text=Hi%20Kayrali%2C%20I%27d%20like%20to%20rent%20a%20saree%20or%20lehenga." class="btn btn-solid" data-magnetic target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"/></svg>Book on WhatsApp</a>
         <a href="#collections" class="btn btn-ghost" data-magnetic>See the collection</a>
       </div>
     </div>
@@ -189,42 +268,42 @@
     <div class="rail" id="rail">
       <div class="rail-track" id="rail-track">
         <article class="piece" data-tilt>
-          <div class="swatch swatch-kanjivaram"><i class="zari"></i></div>
+          <div class="swatch swatch-kanjivaram"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#9c1c1c;--f1d:rgba(0,0,0,.35);--f2:#d9a441;--f3:#fff3d6" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Kanjivaram silk sarees</h3>
             <p>Temple borders, heavy zari, the wedding classic.</p>
           </div>
         </article>
         <article class="piece" data-tilt>
-          <div class="swatch swatch-banarasi"><i class="zari"></i></div>
+          <div class="swatch swatch-banarasi"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#4a2472;--f1d:rgba(0,0,0,.35);--f2:#d9a441;--f3:#f6e2ff" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Banarasi sarees</h3>
             <p>Brocade that catches every light in the hall.</p>
           </div>
         </article>
         <article class="piece" data-tilt>
-          <div class="swatch swatch-bridal"><i class="zari"></i></div>
+          <div class="swatch swatch-bridal"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#c1263f;--f1d:rgba(0,0,0,.3);--f2:#e2b96b;--f3:#fff3d6" aria-hidden="true"><use href="#fig-lehenga"/></svg></div>
           <div class="piece-info">
             <h3>Bridal lehengas</h3>
             <p>Full flare, hand-embellished, fitted to you.</p>
           </div>
         </article>
         <article class="piece" data-tilt>
-          <div class="swatch swatch-reception"><i class="zari"></i></div>
+          <div class="swatch swatch-reception"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#146b78;--f1d:rgba(0,0,0,.3);--f2:#e2c48a;--f3:#eafcff" aria-hidden="true"><use href="#fig-lehenga"/></svg></div>
           <div class="piece-info">
             <h3>Reception lehengas</h3>
             <p>Lighter and sharper, made for the dance floor.</p>
           </div>
         </article>
         <article class="piece" data-tilt>
-          <div class="swatch swatch-organza"><i class="zari"></i></div>
+          <div class="swatch swatch-organza"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#ecc9b6;--f1d:rgba(120,70,50,.25);--f2:#b8863a;--f3:#fff8ee" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Organza and chiffon sarees</h3>
             <p>For open houses and long dinners.</p>
           </div>
         </article>
         <article class="piece" data-tilt>
-          <div class="swatch swatch-party"><i class="zari"></i></div>
+          <div class="swatch swatch-party"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#3c3a55;--f1d:rgba(0,0,0,.35);--f2:#d8d3ea;--f3:#ffffff" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Party wear</h3>
             <p>Sequins and pre-stitched drapes for everything in between.</p>
@@ -248,20 +327,32 @@
     </div>
     <ol class="steps-list">
       <li class="step" data-step="1">
+        <svg class="step-art" viewBox="0 0 160 160" aria-hidden="true"><use href="#s-pick"/></svg>
+        <div class="step-copy">
         <h3>Pick</h3>
         <p>Browse the racks in store or on Instagram. Message us the piece and your event date and we hold it for you.</p>
+      </div>
       </li>
       <li class="step" data-step="2">
+        <svg class="step-art" viewBox="0 0 160 160" aria-hidden="true"><use href="#s-fit"/></svg>
+        <div class="step-copy">
         <h3>Fit</h3>
         <p>Come in for a free fitting. We match the blouse, pin the waist and show you the drape that suits you.</p>
+      </div>
       </li>
       <li class="step" data-step="3">
+        <svg class="step-art" viewBox="0 0 160 160" aria-hidden="true"><use href="#s-wear"/></svg>
+        <div class="step-copy">
         <h3>Wear</h3>
         <p>Collect the day before. Wear it to the wedding, the open house or the shoot. Be the moment.</p>
+      </div>
       </li>
       <li class="step" data-step="4">
+        <svg class="step-art" viewBox="0 0 160 160" aria-hidden="true"><use href="#s-return"/></svg>
+        <div class="step-copy">
         <h3>Return</h3>
         <p>Bring it back the day after, as worn. Cleaning is on us, so there is nothing else to do.</p>
+      </div>
       </li>
     </ol>
   </section>
@@ -297,9 +388,9 @@
   <section class="visit" id="visit" aria-labelledby="visit-title">
     <div class="visit-copy">
       <h2 id="visit-title" class="section-title">Come and try it on</h2>
-      <address class="visit-address">
+      <address class="visit-address"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span>
         10A, Jalan SS5A/9, SS5, Kelana Jaya<br>
-        47301 Petaling Jaya, Selangor
+        47301 Petaling Jaya, Selangor</span>
       </address>
       <dl class="visit-hours">
         <div><dt>Tuesday to Saturday</dt><dd>11am to 8pm</dd></div>
@@ -310,7 +401,11 @@
         <a href="https://wa.me/60123555341?text=Hi%20Kayrali%2C%20I%27d%20like%20to%20book%20a%20fitting." class="btn btn-solid" data-magnetic target="_blank" rel="noopener">Book a fitting</a>
         <a href="https://www.google.com/maps/dir/?api=1&destination=3.0956398%2C101.6058089" class="btn btn-ghost" data-magnetic target="_blank" rel="noopener">Get directions</a>
       </div>
-      <p class="visit-phone">WhatsApp or call <a href="tel:+60123555341">+60 12-355 5341</a></p>
+      <ul class="visit-links">
+        <li><a href="tel:+60123555341"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg>+60 12-355 5341</a></li>
+        <li><a href="https://wa.me/60123555341" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a></li>
+        <li><a href="https://www.instagram.com/kayrali.my" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg>@kayrali.my</a></li>
+      </ul>
     </div>
     <div class="visit-map">
       <iframe
@@ -330,9 +425,9 @@
     <span class="footer-word">kayrali</span>
   </div>
   <div class="footer-links">
-    <a href="https://www.instagram.com/kayrali.my" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://wa.me/60123555341" target="_blank" rel="noopener">WhatsApp</a>
-    <a href="https://www.google.com/maps/dir/?api=1&destination=3.0956398%2C101.6058089" target="_blank" rel="noopener">Directions</a>
+    <a href="https://www.instagram.com/kayrali.my" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-instagram"/></svg>Instagram</a>
+    <a href="https://wa.me/60123555341" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"/></svg>WhatsApp</a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=3.0956398%2C101.6058089" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Directions</a>
   </div>
   <p class="footer-fine">Saree and lehenga rental, Kelana Jaya, Petaling Jaya. &copy; <span id="year"></span> Kayrali.</p>
 </footer>
