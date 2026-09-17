@@ -77,6 +77,7 @@
     const fade = Math.min(1, y / (window.innerHeight * 0.9));
     if (window.__silk) window.__silk.setScroll(fade);
     if (silkCanvas) silkCanvas.style.opacity = String(1 - fade);
+    if (window.__embers) window.__embers.setScroll(y);
   };
   if (lenis) lenis.on('scroll', ({ scroll }) => onScroll(scroll));
   else window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
@@ -182,6 +183,44 @@
     ledgerItems.forEach((li) => li.classList.add('is-on'));
   }
 
+  // ---- Cinematic scroll: ghost words, float-in, velocity skew, marquee speed, footer scale ----
+  if (hasGsap && !reduce) {
+    $$('[data-ghost]').forEach((g) => {
+      const dir = Math.random() < 0.5 ? 1 : -1;
+      gsap.fromTo(g, { xPercent: dir * 8 }, { xPercent: dir * -18, ease: 'none',
+        scrollTrigger: { trigger: g.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+    });
+    $$('[data-float]').forEach((sec) => {
+      gsap.fromTo(sec, { y: 90, scale: 0.94, opacity: 0.4 }, { y: 0, scale: 1, opacity: 1, ease: 'none',
+        scrollTrigger: { trigger: sec, start: 'top 95%', end: 'top 35%', scrub: 0.8 } });
+    });
+    // velocity skew
+    const skewEls = $$('[data-skew]');
+    const skewSetter = gsap.quickTo(skewEls, 'skewY', { duration: 0.5, ease: 'power3.out' });
+    ScrollTrigger.create({
+      onUpdate: (self) => {
+        const v = gsap.utils.clamp(-6, 6, self.getVelocity() / 400);
+        skewSetter(v);
+      },
+    });
+    // marquee speed follows scroll velocity
+    const track = $('.marquee-track');
+    if (track) {
+      track.style.animation = 'none';
+      const tween = gsap.to(track, { xPercent: -50, ease: 'none', duration: 40, repeat: -1 });
+      ScrollTrigger.create({ onUpdate: (self) => {
+        const v = Math.abs(self.getVelocity());
+        gsap.to(tween, { timeScale: 1 + Math.min(v / 600, 6), duration: 0.6, overwrite: true });
+      } });
+      gsap.ticker.add(() => { if (tween.timeScale() > 1) tween.timeScale(Math.max(1, tween.timeScale() * 0.985)); });
+    }
+    // footer wordmark grows as you arrive; kolam spins up
+    const fw = $('.footer-word');
+    if (fw) gsap.fromTo(fw, { scale: 0.7 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.site-footer', start: 'top bottom', end: 'bottom bottom', scrub: 1 } });
+    const fk = $('.footer-kolam');
+    if (fk) { fk.style.animation = 'none'; gsap.fromTo(fk, { rotate: -120 }, { rotate: 60, ease: 'none', scrollTrigger: { trigger: '.site-footer', start: 'top bottom', end: 'bottom bottom', scrub: 1 } }); }
+  }
+
   // ---- Section reveals (titles, visit block, faq items, map, footer word) ----
   if (hasGsap && !reduce) {
     $$('.t-inner').forEach((el) => {
@@ -280,11 +319,40 @@
     });
   }
 
+  // ---- Steps as a pinned film sequence on desktop (created after the rail so pins sort in page order) ----
+  if (hasGsap && !reduce) {
+    ScrollTrigger.matchMedia({
+      '(min-width: 901px) and (hover: hover)': () => {
+        const stepsSec = $('.steps');
+        const stepEls = $$('.step');
+        const kolamSvg = $('.steps-kolam svg');
+        if (!stepsSec || !stepEls.length) return;
+        const activate = (i) => {
+          stepEls.forEach((s, k) => s.classList.toggle('is-active', k === i));
+          const n = String(i + 1);
+          const kolamBox = $('.steps-kolam');
+          if (kolamBox) kolamBox.dataset.active = n;
+          const count = $('#steps-current');
+          if (count && count.textContent !== n) { count.textContent = n; count.classList.remove('flip'); void count.offsetWidth; count.classList.add('flip'); }
+        };
+        const st = ScrollTrigger.create({
+          trigger: stepsSec, pin: true, scrub: true, start: 'top top', refreshPriority: -1, end: '+=' + stepEls.length * 80 + '%',
+          onUpdate: (self) => {
+            activate(Math.min(stepEls.length - 1, Math.floor(self.progress * stepEls.length)));
+            if (kolamSvg) kolamSvg.style.transform = `rotate(${-self.progress * 270}deg)`;
+          },
+        });
+        activate(0);
+        return () => st.kill();
+      },
+    });
+  }
+
   // ---- Steps: active state + kolam quadrant ----
   const steps = $$('.step');
   const kolam = $('.steps-kolam');
   const count = $('#steps-current');
-  if (steps.length && 'IntersectionObserver' in window) {
+  if (steps.length && 'IntersectionObserver' in window && !(hasGsap && !reduce && desktop())) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((en) => {
         if (!en.isIntersecting) return;
@@ -303,9 +371,13 @@
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
     steps.forEach((s) => io.observe(s));
-  } else {
+  } else if (!(hasGsap && !reduce && desktop())) {
     steps.forEach((s) => s.classList.add('is-active'));
   }
+
+  // Recompute scroll positions once fonts and layout settle
+  if (hasGsap && document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+  window.addEventListener('load', () => { if (hasGsap) setTimeout(() => ScrollTrigger.refresh(), 300); });
 
   // ---- Loader and hero entrance: the one orchestrated moment ----
   const loader = $('#loader');
@@ -336,6 +408,7 @@
       document.body.classList.remove('is-loading');
       if (lenis) lenis.start();
       enterHero();
+      if (hasGsap) ScrollTrigger.refresh();
       setTimeout(() => loader.remove(), 1400);
     };
     if (hasGsap) {

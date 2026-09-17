@@ -209,6 +209,8 @@
 <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-dot"></span><span class="cursor-ring"></span></div>
 <div class="grain" aria-hidden="true"></div>
 <canvas class="silk" id="silk" aria-hidden="true"></canvas>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<canvas class="embers" id="embers" aria-hidden="true"></canvas>
 
 <header class="site-header" id="site-header">
   <a href="#top" class="brand" aria-label="Kayrali home">
@@ -274,7 +276,7 @@
       </ol>
     </div>
     <div class="wardrobe-copy">
-      <h2 id="about-title" class="section-title"><span class="t-line"><span class="t-inner">One boutique.<br>Every occasion.</span></span></h2>
+      <h2 id="about-title" class="section-title" data-skew><span class="t-line"><span class="t-inner">One boutique.<br>Every occasion.</span></span></h2>
       <p>Kayrali is a saree and lehenga rental boutique in Kelana Jaya, Petaling Jaya. Walk in, try it on, book the date, and collect the outfit the day before your event.</p>
       <p>Wear it once. Bring it back. We clean it.</p>
       <a href="#how-it-works" class="btn btn-ghost" data-magnetic>See how renting works</a>
@@ -282,48 +284,49 @@
   </section>
 
   <section class="rail-section" id="collections" aria-labelledby="collections-title">
+    <span class="ghost" data-ghost aria-hidden="true">Drape</span>
     <div class="rail-head">
-      <h2 id="collections-title" class="section-title"><span class="t-line"><span class="t-inner">The collection</span></span></h2>
+      <h2 id="collections-title" class="section-title" data-skew><span class="t-line"><span class="t-inner">The collection</span></span></h2>
       <p class="section-note">Rotates every season. Follow us on Instagram for new arrivals, or come in and see the racks.</p>
     </div>
     <div class="rail" id="rail">
       <div class="rail-track" id="rail-track">
-        <article class="piece" data-tilt>
+        <article class="piece" data-tilt data-skew>
           <div class="swatch swatch-kanjivaram"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#9c1c1c;--f1d:rgba(0,0,0,.35);--f2:#d9a441;--f3:#fff3d6" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Kanjivaram silk sarees</h3>
             <p>Temple borders, heavy zari, the wedding classic.</p>
           </div>
         </article>
-        <article class="piece" data-tilt>
+        <article class="piece" data-tilt data-skew>
           <div class="swatch swatch-banarasi"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#4a2472;--f1d:rgba(0,0,0,.35);--f2:#d9a441;--f3:#f6e2ff" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Banarasi sarees</h3>
             <p>Brocade that catches every light in the hall.</p>
           </div>
         </article>
-        <article class="piece" data-tilt>
+        <article class="piece" data-tilt data-skew>
           <div class="swatch swatch-bridal"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#c1263f;--f1d:rgba(0,0,0,.3);--f2:#e2b96b;--f3:#fff3d6" aria-hidden="true"><use href="#fig-lehenga"/></svg></div>
           <div class="piece-info">
             <h3>Bridal lehengas</h3>
             <p>Full flare, hand-embellished, fitted to you.</p>
           </div>
         </article>
-        <article class="piece" data-tilt>
+        <article class="piece" data-tilt data-skew>
           <div class="swatch swatch-reception"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#146b78;--f1d:rgba(0,0,0,.3);--f2:#e2c48a;--f3:#eafcff" aria-hidden="true"><use href="#fig-lehenga"/></svg></div>
           <div class="piece-info">
             <h3>Reception lehengas</h3>
             <p>Lighter and sharper, made for the dance floor.</p>
           </div>
         </article>
-        <article class="piece" data-tilt>
+        <article class="piece" data-tilt data-skew>
           <div class="swatch swatch-organza"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#ecc9b6;--f1d:rgba(120,70,50,.25);--f2:#b8863a;--f3:#fff8ee" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Organza and chiffon sarees</h3>
             <p>For open houses and long dinners.</p>
           </div>
         </article>
-        <article class="piece" data-tilt>
+        <article class="piece" data-tilt data-skew>
           <div class="swatch swatch-party"><i class="zari"></i><svg class="figure" viewBox="0 0 240 480" style="--f1:#3c3a55;--f1d:rgba(0,0,0,.35);--f2:#d8d3ea;--f3:#ffffff" aria-hidden="true"><use href="#fig-saree"/></svg></div>
           <div class="piece-info">
             <h3>Party wear</h3>
@@ -339,8 +342,9 @@
   </section>
 
   <section class="steps" id="how-it-works" aria-labelledby="steps-title">
+    <span class="ghost" data-ghost aria-hidden="true">Rent</span>
     <div class="steps-sticky">
-      <h2 id="steps-title" class="section-title"><span class="t-line"><span class="t-inner">How renting works</span></span></h2>
+      <h2 id="steps-title" class="section-title" data-skew><span class="t-line"><span class="t-inner">How renting works</span></span></h2>
       <div class="steps-kolam" aria-hidden="true">
         <svg viewBox="0 0 200 200"><use href="#k"/></svg>
         <span class="steps-count"><b id="steps-current">1</b>/4</span>
@@ -378,8 +382,9 @@
     </ol>
   </section>
 
-  <section class="ledger" aria-labelledby="ledger-title">
-    <h2 id="ledger-title" class="section-title"><span class="t-line"><span class="t-inner">Buy it, or rent it.</span></span></h2>
+  <section data-float class="ledger" aria-labelledby="ledger-title">
+    <span class="ghost" data-ghost aria-hidden="true">Wear</span>
+    <h2 id="ledger-title" class="section-title" data-skew><span class="t-line"><span class="t-inner">Buy it, or rent it.</span></span></h2>
     <div class="ledger-grid">
       <div class="ledger-col ledger-buy">
         <h3>Buying</h3>
@@ -402,8 +407,9 @@
     </div>
   </section>
 
-  <section class="faq" id="faq" aria-labelledby="faq-title">
-    <h2 id="faq-title" class="section-title"><span class="t-line"><span class="t-inner">Questions people ask</span></span></h2>
+  <section data-float class="faq" id="faq" aria-labelledby="faq-title">
+    <span class="ghost" data-ghost aria-hidden="true">Ask</span>
+    <h2 id="faq-title" class="section-title" data-skew><span class="t-line"><span class="t-inner">Questions people ask</span></span></h2>
     <div class="faq-list">
       <details class="faq-item">
         <summary>How long can I rent a saree or lehenga for?</summary>
@@ -424,9 +430,10 @@
     </div>
   </section>
 
-  <section class="visit" id="visit" aria-labelledby="visit-title">
+  <section data-float class="visit" id="visit" aria-labelledby="visit-title">
+    <span class="ghost" data-ghost aria-hidden="true">Visit</span>
     <div class="visit-copy" data-reveal>
-      <h2 id="visit-title" class="section-title"><span class="t-line"><span class="t-inner">Come and try it on</span></span></h2>
+      <h2 id="visit-title" class="section-title" data-skew><span class="t-line"><span class="t-inner">Come and try it on</span></span></h2>
       <address class="visit-address"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span>
         10A, Jalan SS5A/9, SS5, Kelana Jaya<br>
         47301 Petaling Jaya, Selangor</span>
@@ -477,6 +484,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }</script>
 <script type="module" src="js/silk.js"></script>
+<script src="js/embers.js" defer></script>
 <script src="js/main.js" defer></script>
 </body>
 </html>
