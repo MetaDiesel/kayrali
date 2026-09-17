@@ -255,18 +255,6 @@ main > section:not(.hero) { background: var(--ink); }
 }
 .section-note { color: var(--cream-60); max-width: 40ch; }
 
-.intro {
-  display: grid; justify-items: start; gap: 40px;
-  padding: clamp(96px, 14vw, 180px) var(--gutter);
-}
-.kolam-mark { color: var(--gold); stroke-width: 4; }
-.intro-text {
-  font-family: var(--display); font-size: clamp(1.6rem, 3.4vw, 3rem);
-  line-height: 1.25; letter-spacing: -0.01em; max-width: 26ch;
-}
-.intro-text .w { display: inline-block; transition: opacity 0.4s; }
-.js .intro-text .w { opacity: 0.18; }
-.intro-text .w.on { opacity: 1; }
 
 /* ---------- Collection rail ---------- */
 
@@ -407,19 +395,77 @@ main > section:not(.hero) { background: var(--ink); }
 .step-art path, .step-art circle { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease) 0.1s; }
 .step.is-active .step-art path, .step.is-active .step-art circle { stroke-dashoffset: 0; }
 
-/* ---------- Why ---------- */
+/* ---------- Wardrobe scene ---------- */
 
-.why {
-  display: grid; gap: 0.4em;
-  padding: clamp(96px, 14vw, 200px) var(--gutter);
-  font-family: var(--display); font-size: clamp(1.9rem, 5.2vw, 5rem);
-  line-height: 1.08; letter-spacing: -0.015em;
+.wardrobe {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center; gap: var(--gutter);
+  min-height: 100svh; padding: 80px var(--gutter);
+}
+.wardrobe-stage {
+  position: relative; aspect-ratio: 1; max-height: 80vh; width: 100%; max-width: 640px;
+  margin: 0 auto; display: grid; place-items: center;
+}
+.wardrobe-kolam {
+  position: absolute; inset: 6%; width: 88%; height: 88%;
+  color: var(--rust); stroke-width: 1.6; opacity: 0.9;
+  transform-origin: center; animation: spin 120s linear infinite;
+}
+.wardrobe-kolam .kolam-dots { color: var(--gold); }
+.wardrobe-figures { position: relative; height: 82%; aspect-ratio: 1 / 2; }
+.wf {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; transform: translateY(14px) scale(0.98);
+  transition: opacity 0.6s var(--ease), transform 0.8s var(--ease-out);
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+}
+.wf.is-on { opacity: 1; transform: none; }
+.wardrobe-tags {
+  list-style: none; margin: 0; padding: 0;
+  position: absolute; left: 0; bottom: 4%;
+  font-family: var(--display); font-style: italic; font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  color: var(--gold-2); display: grid;
+}
+.wardrobe-tags li {
+  grid-area: 1 / 1; opacity: 0; transform: translateY(10px);
+  transition: opacity 0.5s, transform 0.6s var(--ease-out);
+}
+.wardrobe-tags li.is-on { opacity: 1; transform: none; }
+.wardrobe-copy { display: grid; gap: 22px; justify-items: start; max-width: 46ch; }
+.wardrobe-copy p { font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.6; color: var(--cream); }
+.wardrobe-copy p + p { color: var(--gold-2); font-family: var(--display); font-size: clamp(1.4rem, 2vw, 1.8rem); line-height: 1.2; text-wrap: balance; }
+
+/* ---------- Ledger ---------- */
+
+.ledger {
+  display: grid; gap: clamp(40px, 6vw, 80px);
+  padding: clamp(80px, 10vw, 140px) var(--gutter);
   border-top: 1px solid var(--cream-12);
 }
-.why-line { overflow: hidden; }
-.why-line > span { display: block; }
-.js .why-line > span { transform: translateY(105%); }
-.why-line em { color: var(--gold-2); }
+.ledger-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gutter); }
+.ledger-col h3 { font-family: var(--display); font-size: clamp(1.4rem, 2.2vw, 2rem); margin-bottom: 20px; }
+.ledger-buy h3 { color: var(--cream-60); }
+.ledger-rent h3 { color: var(--gold-2); }
+.ledger-col ul { list-style: none; margin: 0; padding: 0; }
+.ledger-col li {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 0; border-top: 1px solid var(--cream-12);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+}
+.ledger-col li:last-child { border-bottom: 1px solid var(--cream-12); }
+.ledger-buy li span { position: relative; color: var(--cream-60); transition: color 0.6s; }
+.ledger-buy li span::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 55%; height: 2px;
+  background: var(--gold-2); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.7s var(--ease);
+}
+.ledger-buy li.is-on span { color: var(--cream-30); }
+.ledger-buy li.is-on span::after { transform: scaleX(1); }
+.ledger-rent li { color: var(--cream); opacity: 0.35; transform: translateX(12px); transition: opacity 0.6s, transform 0.7s var(--ease-out); }
+.ledger-rent li.is-on { opacity: 1; transform: none; }
+.tick { width: 26px; height: 26px; flex: none; fill: none; stroke: var(--gold-2); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tick path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.6s var(--ease) 0.2s; }
+.ledger-rent li.is-on .tick path { stroke-dashoffset: 0; }
 
 /* ---------- FAQ ---------- */
 
@@ -510,7 +556,9 @@ main > section:not(.hero) { background: var(--ink); }
   .rail-track { padding-bottom: 56px; }
   .piece { width: min(78vw, 340px); }
 
-  .steps, .faq, .visit { grid-template-columns: 1fr; }
+  .steps, .faq, .visit, .wardrobe, .ledger-grid { grid-template-columns: 1fr; }
+  .wardrobe { min-height: 0; padding-top: 60px; }
+  .wardrobe-stage { max-height: none; }
   .steps-sticky { position: static; }
   .steps-kolam { width: 180px; }
   .step { min-height: 0; grid-template-columns: 80px minmax(0, 1fr); align-items: start; }
@@ -531,10 +579,12 @@ main > section:not(.hero) { background: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   .grain, .marquee-track, .scroll-cue span, .footer-kolam { animation: none; }
   .loader { display: none; }
-  .hero-title .line-inner, .why-line > span { transform: none; }
+  .hero-title .line-inner { transform: none; }
   .hero-side, .hero-meta, .scroll-cue { opacity: 1; }
-  .intro-text .w { opacity: 1; }
   .step { opacity: 1; }
+  .wardrobe-kolam { animation: none; }
+  .ledger-rent li { opacity: 1; transform: none; }
+  .tick path { stroke-dashoffset: 0; }
   .step-art path, .step-art circle { stroke-dashoffset: 0; }
   .silk { display: none; }
   .cursor { display: none; }

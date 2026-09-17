@@ -13,7 +13,7 @@
 
   // ---- Inline the kolam symbol where CSS needs to reach individual paths ----
   const symbol = $('#k');
-  ['.loader-kolam', '.steps-kolam svg'].forEach((sel) => {
+  ['.loader-kolam', '.steps-kolam svg', '.wardrobe-kolam'].forEach((sel) => {
     const svg = $(sel);
     if (!svg || !symbol) return;
     svg.innerHTML = symbol.innerHTML;
@@ -133,37 +133,53 @@
     });
   }
 
-  // ---- Intro: light up word by word as it scrolls into view ----
-  const intro = $('[data-reveal-words]');
-  if (intro) {
-    const words = intro.textContent.trim().split(/\s+/);
-    intro.innerHTML = words.map((w) => `<span class="w">${w}</span>`).join(' ');
-    const spans = $$('.w', intro);
+  // ---- Wardrobe scene: outfit changes with scroll (desktop) or on a timer ----
+  const stage = $('#wardrobe-stage');
+  if (stage) {
+    const looks = $$('.wf', stage);
+    const tags = $$('.wardrobe-tags li', stage);
+    let current = -1;
+    const show = (i) => {
+      if (i === current) return;
+      current = i;
+      looks.forEach((l, k) => l.classList.toggle('is-on', k === i));
+      tags.forEach((t, k) => t.classList.toggle('is-on', k === i));
+    };
+    show(0);
+    let pinned = false;
     if (hasGsap && !reduce) {
-      ScrollTrigger.create({
-        trigger: intro, start: 'top 80%', end: 'bottom 45%', scrub: true,
-        onUpdate: (self) => {
-          const n = Math.round(self.progress * spans.length);
-          spans.forEach((s, i) => s.classList.toggle('on', i < n));
+      ScrollTrigger.matchMedia({
+        '(min-width: 901px) and (hover: hover)': () => {
+          pinned = true;
+          const st = ScrollTrigger.create({
+            trigger: stage.closest('.wardrobe'), pin: true, scrub: true,
+            start: 'top top', end: '+=' + looks.length * 60 + '%',
+            onUpdate: (self) => {
+              show(Math.min(looks.length - 1, Math.floor(self.progress * looks.length)));
+            },
+          });
+          return () => { st.kill(); pinned = false; };
         },
       });
-    } else {
-      spans.forEach((s) => s.classList.add('on'));
     }
+    setInterval(() => { if (!pinned) show((current + 1) % looks.length); }, 2400);
   }
 
-  // ---- Why: line reveals ----
-  $$('[data-reveal-line]').forEach((line) => {
-    line.innerHTML = `<span>${line.innerHTML}</span>`;
-  });
-  if (hasGsap && !reduce) {
-    $$('[data-reveal-line] > span').forEach((span, i) => {
-      gsap.to(span, {
-        y: 0, duration: 1.2, ease: 'power4.out',
-        scrollTrigger: { trigger: span.parentElement, start: 'top 88%', once: true },
-        delay: i * 0.08,
+  // ---- Ledger: strike through buying, tick renting ----
+  const ledgerItems = $$('.ledger-col li');
+  if (ledgerItems.length && 'IntersectionObserver' in window && !reduce) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const list = Array.from(en.target.parentElement.children);
+        const idx = list.indexOf(en.target);
+        setTimeout(() => en.target.classList.add('is-on'), idx * 220);
+        io.unobserve(en.target);
       });
-    });
+    }, { threshold: 0.6 });
+    ledgerItems.forEach((li) => io.observe(li));
+  } else {
+    ledgerItems.forEach((li) => li.classList.add('is-on'));
   }
 
   // ---- Collection rail: pinned horizontal scroll on desktop ----
