@@ -182,6 +182,81 @@
     ledgerItems.forEach((li) => li.classList.add('is-on'));
   }
 
+  // ---- Section reveals (titles, visit block, faq items, map, footer word) ----
+  if (hasGsap && !reduce) {
+    $$('.t-inner').forEach((el) => {
+      gsap.to(el, { y: 0, duration: 1.2, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+    });
+    $$('[data-reveal]').forEach((block) => {
+      gsap.to(block.children, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, ease: 'power3.out', scrollTrigger: { trigger: block, start: 'top 80%', once: true } });
+    });
+    const faqItems = $$('.faq-item');
+    if (faqItems.length) gsap.to(faqItems, { opacity: 1, x: 0, duration: 0.8, stagger: 0.12, ease: 'power3.out', scrollTrigger: { trigger: faqItems[0], start: 'top 85%', once: true } });
+    const map = $('[data-reveal-map]');
+    if (map) gsap.to(map, { clipPath: 'inset(0 0% 0% 0 round 200px 6px 6px 6px)', duration: 1.4, ease: 'power4.inOut', scrollTrigger: { trigger: map, start: 'top 80%', once: true } });
+    const letters = $$('.footer-word .fl');
+    if (letters.length) gsap.to(letters, { y: 0, duration: 1.1, stagger: 0.06, ease: 'power4.out', scrollTrigger: { trigger: '.site-footer', start: 'top 70%', once: true } });
+    const hourRows = $$('.visit-hours div');
+    if (hourRows.length) ScrollTrigger.create({ trigger: '.visit-hours', start: 'top 85%', once: true, onEnter: () => hourRows.forEach((r, i) => setTimeout(() => r.classList.add('is-on'), i * 180)) });
+  } else {
+    $$('.t-inner').forEach((el) => (el.style.transform = 'none'));
+    $$('[data-reveal] > *').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
+    $$('.faq-item').forEach((el) => { el.style.opacity = 1; el.style.transform = 'none'; });
+    const map = $('[data-reveal-map]'); if (map) map.style.clipPath = 'none';
+    $$('.footer-word .fl').forEach((el) => (el.style.transform = 'none'));
+    $$('.visit-hours div').forEach((r) => r.classList.add('is-on'));
+  }
+
+  // ---- FAQ: animate open and close ----
+  $$('.faq-item').forEach((item) => {
+    const summary = $('summary', item);
+    const body = $('.faq-body', item);
+    if (!summary || !body) return;
+    summary.addEventListener('click', (e) => {
+      if (!hasGsap || reduce) return;
+      e.preventDefault();
+      if (item.open) {
+        gsap.to(body, { height: 0, duration: 0.45, ease: 'power3.inOut', onComplete: () => { item.open = false; body.style.height = ''; } });
+      } else {
+        // close any sibling that is open (same behaviour as the name attribute)
+        $$('.faq-item[open]').forEach((other) => {
+          if (other === item) return;
+          const ob = $('.faq-body', other);
+          gsap.to(ob, { height: 0, duration: 0.35, ease: 'power3.inOut', onComplete: () => { other.open = false; ob.style.height = ''; } });
+        });
+        item.open = true;
+        gsap.from(body, { height: 0, duration: 0.55, ease: 'power3.out', clearProps: 'height' });
+        gsap.from(body.firstElementChild, { opacity: 0, y: -8, duration: 0.5, delay: 0.1 });
+      }
+    });
+  });
+
+  // ---- Open now: store hours in Malaysia time ----
+  const openEl = $('#open-now');
+  const openText = $('#open-now-text');
+  if (openEl && openText) {
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kuala_Lumpur' }));
+    const day = now.getDay(); // 0 Sun .. 6 Sat
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const hours = { 0: [660, 1080], 2: [660, 1200], 3: [660, 1200], 4: [660, 1200], 5: [660, 1200], 6: [660, 1200] };
+    const fmt = (m) => (m % 60 ? `${((m / 60) % 12) || 12}:${String(m % 60).padStart(2, '0')}` : `${((m / 60) % 12) || 12}`) + (m >= 720 ? 'pm' : 'am');
+    const today = hours[day];
+    let text, closed = false;
+    if (today && mins >= today[0] && mins < today[1]) {
+      text = `Open now, until ${fmt(today[1])}`;
+    } else {
+      closed = true;
+      let d = day, add = 0;
+      if (!today || mins >= today[1]) { do { d = (d + 1) % 7; add++; } while (!hours[d]); }
+      const names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const when = add === 0 ? 'today' : add === 1 ? 'tomorrow' : names[d];
+      text = `Closed now, opens ${when} at ${fmt(hours[d][0])}`;
+    }
+    openText.textContent = text;
+    openEl.classList.toggle('is-closed', closed);
+    openEl.hidden = false;
+  }
+
   // ---- Collection rail: pinned horizontal scroll on desktop ----
   const rail = $('#rail');
   const track = $('#rail-track');
@@ -216,8 +291,15 @@
         steps.forEach((s) => s.classList.remove('is-active'));
         en.target.classList.add('is-active');
         const n = en.target.dataset.step;
-        if (kolam) kolam.dataset.active = n;
-        if (count) count.textContent = n;
+        if (kolam) {
+          kolam.dataset.active = n;
+          const svg = kolam.querySelector('svg');
+          if (svg) svg.style.transform = `rotate(${-(n - 1) * 90}deg)`;
+        }
+        if (count && count.textContent !== n) {
+          count.textContent = n;
+          count.classList.remove('flip'); void count.offsetWidth; count.classList.add('flip');
+        }
       });
     }, { rootMargin: '-45% 0px -45% 0px' });
     steps.forEach((s) => io.observe(s));
